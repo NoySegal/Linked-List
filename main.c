@@ -2,6 +2,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
+#include "list.h"
 #define INPUT_SIZE 100
 
 void user_interface() {
@@ -9,7 +10,8 @@ void user_interface() {
 	int i;
 	char input[INPUT_SIZE];
 	char *token;
-	int num1, num2;
+	int num1 = NULL, num2 = NULL;
+	node_t * root = NULL;
 	printf("Command list:\n");
 	printf ("Add_end i	– insert element I at end of list.\n");
 	printf ("Add_start i	– insert element I at start of list.\n");
@@ -19,7 +21,9 @@ void user_interface() {
 	printf("Print		– print the entire list.\n");
 	printf("Exit		– exit the program\n");
 	while (exit != 1) {
-		input[INPUT_SIZE] = "";
+		input[0] = '\0';
+		num1 = NULL;
+		num2 = NULL;
 		printf("What would you like to do next?\n");
 		scanf("%[^\n]%*c", input);
 		for (i = 0; input[i]; i++) {
@@ -29,40 +33,46 @@ void user_interface() {
 		if (strcmp(token, "exit") == 0) {
 			exit = 1;
 		} else if (strcmp(token, "print") == 0) {
-			
+			print_list(root);			
 		} else if (strcmp(token, "add_end") == 0) {
 			token = strtok(NULL, " ");
-			num1 = atoi(token);
+			if (token != NULL) {
+				num1 = atoi(token);
+				add_end(&root, num1);
+			}
 		} else if (strcmp(token, "add_start") == 0) {
 			token = strtok(NULL, " ");
-			num1 = atoi(token);
+			if (token != NULL) {
+				num1 = atoi(token);
+				add_start(&root, num1);
+			}
 		} else if (strcmp(token, "index") == 0) {
 			token = strtok(NULL, " ");
-			num1 = atoi(token);
+			if (token != NULL) {
+				num1 = atoi(token);
+				print_index(&root, num1);
+			}
 		} else if (strcmp(token, "add_after") == 0) {
 			token = strtok(NULL, " ");
+			if (token == NULL) {
+				continue;
+			}
 			num1 = atoi(token);
 			token = strtok(NULL, " ");
+			if (token == NULL) {
+				continue;
+			}
 			num2 = atoi(token);
+			add_after(&root, num1, num2);
+		} else if (strcmp(token, "del") == 0) {
+			token = strtok(NULL, " ");
+			if (token != NULL) {
+				num1 = atoi(token);
+				delete_index(&root, num1);
+			}
 		} else {
 			printf("Wrong command, please try again!\n");
 		}
-/*		if (strstr(input, "add_end")) {
-			num1 = atoi(input + 8);
-		} else if (strstr(input, "add_start")) {
-			num1 = atoi(input + 10);
-		} else if (strstr(input, "add_after")) {
-			num1 = atoi(input + 
-		} else if (strstr(input, "index")) {
-
-		} else if (strstr(input, "print")) {
-
-		} else if (strstr(input, "exit")) {
-			exit = 1;
-		} else {
-			printf("Wrong command, please try again!\n");
-		}*/
-			
 	}
 }
 
