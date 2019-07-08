@@ -1,5 +1,5 @@
 # Linked List
-Linked list implementation w/ user intercation 
+Linked list implementation w/ user interactions 
 
 ## The data structure
 ```C
@@ -8,6 +8,10 @@ typedef struct node {
   struct node *next;
 } node_t;
 ```
+
+### Special abilities
+* The linked list can be reversed.
+* It can be checked whether or not the linked list represents a [*Palindrome number*](https://en.wikipedia.org/wiki/Palindrome).
 
 ## User Interface
 User can interact using these commands:
