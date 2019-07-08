@@ -112,3 +112,68 @@ void delete_index(node_t **root, int index) {
 	printf("ERROR: index is out-of-bound. Exitting..\n");
 	exit(1);
 }
+
+bool compare_lists(node_t *list1, node_t *list2) {
+	node_t *comp1 = list1;
+	node_t *comp2 = list2;
+	while(comp1 != NULL && comp2 != NULL) {
+		if (comp1->val != comp2->val) {
+			return false;
+		}
+		comp1 = comp1->next;
+		comp2 = comp2->next;
+	}
+	if (comp1 == NULL && comp2 == NULL) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+void reverse_list(node_t **root) {
+	node_t *nex = (*root)->next;
+	node_t *prev = NULL;
+	while(nex != NULL) {
+		(*root)->next = prev;
+		prev = *root;
+		*root = nex;
+		nex = nex->next;
+	}
+	(*root)->next = prev;
+	return;
+}
+
+void isListPalindrome(node_t *root) {
+	node_t *first_half = root;
+	node_t *middle = NULL;
+	node_t *second_half = root;
+	node_t *prev_of_second_half = root;
+	node_t *temp = root;
+	if (root == NULL || root->next == NULL) {
+		printf("Yes. The list represents a palindrome number!\n");
+		return;
+	}
+	while (temp != NULL && temp->next != NULL) {
+		prev_of_second_half = second_half;
+		temp = (temp->next)->next;
+		second_half = second_half->next;
+	}
+	if (temp != NULL) {
+		middle = second_half;
+		second_half = second_half->next;
+	}
+	prev_of_second_half->next = NULL;
+	reverse_list(&first_half);
+	if (compare_lists(first_half, second_half) == true) {
+		printf("Yes. The list represents a palindrome number!\n");
+	} else {
+		printf("No. The list doesn't represent a palindrome number!\n");
+	}
+	reverse_list(&first_half);
+	if (temp != NULL) {
+		prev_of_second_half->next = middle;
+	} else {
+		prev_of_second_half->next = second_half;
+	}
+	return;
+}
