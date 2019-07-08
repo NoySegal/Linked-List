@@ -5,6 +5,15 @@
 #include "list.h"
 #define INPUT_SIZE 100
 
+
+void free_list(node_t *root) {
+	if (root == NULL) {
+		return;
+	}
+	free_list(root->next);
+	free(root);
+}
+
 void user_interface() {
 	int exit = 0;
 	int i;
@@ -31,6 +40,7 @@ void user_interface() {
 		}
 		token = strtok(input, " ");
 		if (strcmp(token, "exit") == 0) {
+			free_list(root);
 			exit = 1;
 		} else if (strcmp(token, "print") == 0) {
 			print_list(root);			
