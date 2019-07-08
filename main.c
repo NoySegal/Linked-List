@@ -27,8 +27,10 @@ void user_interface() {
 	printf ("Add_after i j	– insert element I after the first occurrence of element j.\n"); 
 	printf("Index i		– print the first index where element I is found, -1 if not found. The first element starts at index 0\n");
 	printf("Del index	– remove the element at the specified index.\n");
+	printf("Palindrome	– Checks if the list represents a palindrome number.\n");
+	printf("reverse		– Revereses the list.");
 	printf("Print		– print the entire list.\n");
-	printf("Exit		– exit the program\n");
+	printf("Exit		– exit the program.\n");
 	while (exit != 1) {
 		input[0] = '\0';
 		num1 = NULL;
@@ -42,8 +44,12 @@ void user_interface() {
 		if (strcmp(token, "exit") == 0) {
 			free_list(root);
 			exit = 1;
+		} else if (strcmp(token, "palindrome") == 0) {
+			isListPalindrome(root);
 		} else if (strcmp(token, "print") == 0) {
 			print_list(root);			
+		} else if (strcmp(token, "reverse") == 0) {
+			reverse_list(&root);
 		} else if (strcmp(token, "add_end") == 0) {
 			token = strtok(NULL, " ");
 			if (token != NULL) {
