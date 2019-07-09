@@ -19,7 +19,7 @@ void user_interface() {
 	int i;
 	char input[INPUT_SIZE];
 	char *token;
-	int num1 = NULL, num2 = NULL;
+	int num1, num2;
 	node_t * root = NULL;
 	printf("Command list:\n");
 	printf ("Add_end i	– insert element I at end of list.\n");
@@ -33,8 +33,6 @@ void user_interface() {
 	printf("Exit		– exit the program.\n");
 	while (exit != 1) {
 		input[0] = '\0';
-		num1 = NULL;
-		num2 = NULL;
 		printf("What would you like to do next?\n");
 		scanf("%[^\n]%*c", input);
 		for (i = 0; input[i]; i++) {
