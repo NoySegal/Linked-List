@@ -42,6 +42,8 @@ Add_after 3 2 // [2, 3, 1]
 
 Index 3 // list is unchanged, result is 1 (remember – indices start at 0)
 
+Del 2 // [2, 3]
+
 Print // list is unchanged, prints [2, 3]
 
 Exit // Hooray, we’re done!
